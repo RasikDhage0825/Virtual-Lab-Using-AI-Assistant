@@ -352,6 +352,204 @@
         /* Thin Scrollbar for the info box */
         .assistant-content::-webkit-scrollbar { width: 4px; }
         .assistant-content::-webkit-scrollbar-thumb { background-color: #cbd5e1; border-radius: 4px; }
+
+        /* =====================================================================
+           MODERN PROFESSIONAL THEME
+           A clean, flat, SaaS-style re-skin (white cards, thin borders,
+           restrained shadows, one accent blue) replacing the earlier soft-UI
+           look. Purely visual: background/border/box-shadow/border-radius
+           only. Inputs deliberately keep a real, visible border so the
+           assistant boxes' focus:border-* utilities keep working.
+           ===================================================================== */
+        :root {
+            --app-bg: #f4f6f9;
+            --app-surface: #ffffff;
+            --app-border: #e2e8f0;
+            --app-border-strong: #cbd5e1;
+            --app-accent: #2563eb;
+            --app-accent-dark: #1d4ed8;
+            --app-shadow: 0 1px 2px rgba(15, 23, 42, 0.04), 0 1px 3px rgba(15, 23, 42, 0.06);
+            --app-shadow-md: 0 2px 6px rgba(15, 23, 42, 0.07), 0 1px 3px rgba(15, 23, 42, 0.05);
+            --app-dark-bg: #0f172a;
+            --app-dark-surface: #172033;
+            --app-dark-border: #2a3552;
+        }
+
+        body { background-color: var(--app-bg); font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+
+        /* ---- Flat cards: any bg-white + rounded-xl panel ---- */
+        .bg-white.rounded-xl {
+            background: var(--app-surface);
+            border: 1px solid var(--app-border);
+            border-radius: 14px;
+            box-shadow: var(--app-shadow);
+        }
+        .bg-white.rounded-xl.shadow-inner { box-shadow: inset 0 1px 4px rgba(15,23,42,0.08); }
+
+        .bg-slate-dark.rounded-xl {
+            background: var(--app-dark-bg);
+            border: 1px solid var(--app-dark-border);
+            border-radius: 14px;
+            box-shadow: var(--app-shadow-md);
+        }
+
+        /* ---- Teacher / Friend assistant panels: keep their tint,
+               modern flat "alert card" look with a clear left accent ---- */
+        .teacher-panel, .friend-panel {
+            border-left: 4px solid var(--app-accent);
+            border-radius: 10px;
+            background: #f8fafc;
+        }
+        .friend-panel { border-left-color: #10B981; }
+
+        .chat-bubble {
+            border-radius: 10px;
+            box-shadow: var(--app-shadow);
+        }
+
+        .assistant-info-box {
+            border: 1px solid #dbeafe;
+            border-radius: 10px;
+        }
+
+        /* ---- Component palette buttons: clean icon+label tiles ---- */
+        .component-button {
+            border-radius: 10px;
+            border: 1px solid rgba(0,0,0,0.08);
+            box-shadow: var(--app-shadow);
+            text-shadow: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 2px;
+            transition: transform 0.12s ease, box-shadow 0.12s ease;
+        }
+        .component-button:hover { transform: translateY(-1px); box-shadow: var(--app-shadow-md); }
+        .component-button:active { transform: translateY(0); box-shadow: inset 0 1px 3px rgba(0,0,0,0.25); }
+
+        /* Generic rule for rounded, shadowed CTA buttons across the lab */
+        button[class*="rounded"][class*="shadow"]:not(#bench-switch-btn) {
+            box-shadow: var(--app-shadow);
+            border: none;
+            transition: all 0.15s ease;
+        }
+        button[class*="rounded"][class*="shadow"]:not(#bench-switch-btn):hover {
+            box-shadow: var(--app-shadow-md);
+            transform: translateY(-1px);
+        }
+        button[class*="rounded"][class*="shadow"]:not(#bench-switch-btn):active {
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.25);
+            transform: translateY(0);
+        }
+        #bench-switch-btn { box-shadow: var(--app-shadow-md); }
+
+        /* ---- Text/number inputs: clean flat fields.
+               A real, visible border is kept (not "none") so the assistant's
+               focus:border-blue-400 / focus:border-green-500 utilities still
+               show focus correctly. ---- */
+        input[type="text"], input[type="number"] {
+            background: #ffffff;
+            border: 1px solid var(--app-border-strong);
+            border-radius: 8px;
+        }
+
+        /* ---- Circuit canvas frame ---- */
+        #canvas-container {
+            border: 1px solid var(--app-border);
+            border-radius: 14px;
+            box-shadow: var(--app-shadow-md);
+        }
+
+        /* ---- Digital I/O indicators & retro readout keep an authentic
+               "instrument display" inset look ---- */
+        .io-indicator { box-shadow: inset 0 1px 4px rgba(0,0,0,0.5); }
+        .digital-screen { box-shadow: inset 0 2px 6px rgba(0,0,0,0.6); border: 1px solid #0f172a; }
+
+        /* ---- Experiment 1 modal: clean dark surfaces ---- */
+        .exp1-header { background: var(--app-dark-bg); border-bottom: 1px solid var(--app-dark-border); }
+        .exp1-sidebar { background: var(--app-dark-surface); border-right: 1px solid var(--app-dark-border); }
+        .exp1-sidebar button { border-radius: 8px; margin: 2px 10px; }
+        .exp1-sidebar button.active-tab { background: rgba(37, 99, 235, 0.15); border-left-color: var(--app-accent); }
+        .exp1-workplace { background: var(--app-dark-surface); border-left: 1px solid var(--app-dark-border); }
+        .exp1-center { background-color: var(--app-bg); }
+        .fullscreen-modal { background: var(--app-bg); }
+
+        /* =====================================================================
+           FULL-SCREEN LAYOUT
+           ===================================================================== */
+        html, body {
+            margin: 0 !important;
+            padding: 0 !important;
+            width: 100%;
+        }
+        body {
+            padding: 10px !important; /* set to 0 for absolute edge-to-edge */
+        }
+        .max-w-6xl {
+            max-width: 100% !important;
+            width: 100% !important;
+            margin: 0 !important;
+        }
+
+        /* =====================================================================
+           RIGHT-SIDE ASSISTANT DRAWER
+           Teacher + Friend Assistant live in a slide-in panel on the right,
+           toggled open/closed with a floating tab. Overlay style (doesn't
+           reflow the rest of the page), so nothing else has to resize.
+           ===================================================================== */
+        #assistant-drawer {
+            position: fixed;
+            top: 0;
+            right: 0;
+            height: 100vh;
+            width: min(400px, 92vw);
+            background: var(--app-surface);
+            border-left: 1px solid var(--app-border);
+            box-shadow: -8px 0 24px rgba(15, 23, 42, 0.12);
+            z-index: 60;
+            overflow-y: auto;
+            padding: 16px;
+            transition: transform 0.28s ease;
+            transform: translateX(0);
+        }
+        #assistant-drawer.closed { transform: translateX(100%); }
+        #assistant-drawer-toggle {
+            position: fixed;
+            top: 16px;
+            right: min(400px, 92vw);
+            z-index: 61;
+            background: var(--app-accent);
+            color: #fff;
+            border: none;
+            padding: 10px 8px;
+            border-radius: 10px 0 0 10px;
+            box-shadow: var(--app-shadow-md);
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 700;
+            transition: right 0.28s ease;
+        }
+        #assistant-drawer.closed ~ #assistant-drawer-toggle,
+        #assistant-drawer-toggle.drawer-closed { right: 0; }
+        #assistant-drawer-toggle:hover { background: var(--app-accent-dark); }
+
+        /* ---- Workplace / Practical Sandbox parts-box: clean icon tiles ---- */
+        #tab-workplace .grid button {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+            min-height: 52px;
+            border-radius: 10px;
+            border: 1px solid var(--app-border);
+            font-size: 11px;
+            font-weight: 600;
+            box-shadow: var(--app-shadow);
+            transition: transform 0.12s ease, box-shadow 0.12s ease;
+        }
+        #tab-workplace .grid button:hover { transform: translateY(-1px); box-shadow: var(--app-shadow-md); }
     </style>
 </head>
 <body class="p-4 md:p-8">
@@ -413,11 +611,21 @@
         <div class="bg-white p-4 rounded-xl shadow-lg mb-4">
             <label for="experiment-select" class="text-sm font-bold text-gray-700 block mb-2">Experiment Protocol Selection:</label>
             <select id="experiment-select" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2 border">
-        <option value="EXP_1_THEORY">1. Study of Active & Passive Components (Theory)</option>
-        <option value="OHMS_LAW">2. DC Analysis: Ohm's Law (Series)</option>
-        <option value="MOSFET_SWITCH">3. Semiconductor Control: MOSFET Switching</option>
-        <option value="CS_AMPLIFIER">4. Analog Biasing: Common Source Amplifier (DC)</option>
-        <option value="DIGITAL_LOGIC">5. Digital Systems: Conceptual IC Testing</option>
+        <optgroup label="Year 1 Practical Syllabus">
+        <option value="EXP_1_THEORY">1. Study of Active &amp; Passive Components</option>
+        <option value="MEASUREMENTS">2. Measurements: CRO, Function Generator &amp; Multimeter</option>
+        <option value="DIODE_VI">3. V-I Characteristics of PN Junction Diode (Coming Soon)</option>
+        <option value="RECTIFIER">4. Rectifier Circuits: Bridge Rectifier DC Supply (Coming Soon)</option>
+        <option value="CE_AMPLIFIER">5. CE BJT Amplifier &amp; Gain Calculation (Coming Soon)</option>
+        <option value="OPAMP">6. Op-Amp Linear Applications (Coming Soon)</option>
+        <option value="LOGIC_GATES">7. Logic Gates &amp; Half/Full Adder</option>
+        </optgroup>
+        <optgroup label="Bonus Practice Circuits">
+        <option value="OHMS_LAW">Bonus: Ohm's Law (Series Circuit)</option>
+        <option value="MOSFET_SWITCH">Bonus: MOSFET Switching Circuit</option>
+        <option value="CS_AMPLIFIER">Bonus: Common Source Amplifier (DC Bias)</option>
+        <option value="DIGITAL_LOGIC">Bonus: Conceptual IC Testing</option>
+        </optgroup>
 </select>
         </div>
 
@@ -521,6 +729,7 @@
                             <option value="None">-- Select Mode --</option>
                             <option value="V">Voltmeter (V)</option>
                             <option value="A">Ammeter (A)</option>
+                            <option value="Ω">Ohmmeter (Ω)</option>
                         </select>
                         <p class="text-xs text-gray-500 italic">V: Connect parallel (across 1 component). A: Connect in series (break a wire).</p>
                     </div>
@@ -545,26 +754,6 @@
                     </div>
                 </div>
 
-
-                <!-- 1. Teacher Assistant (Concept Explanation) -->
-                <div id="teacher-panel-container" class="bg-white p-4 rounded-xl shadow-lg">
-    <div class="flex justify-between items-center mb-4 border-b pb-2">
-        <h3 class="text-lg font-bold flex items-center text-primary-blue">
-            <span role="img" aria-label="teacher" class="mr-2 text-xl">🎓</span> Teacher Assistant
-        </h3>
-        <button id="teacher-speak-toggle" class="text-gray-400 hover:text-primary-blue transition-colors font-bold text-lg p-1 border border-gray-200 rounded" title="Toggle Voice Explanation">
-            <span id="speaker-icon">🔇</span>
-        </button>
-    </div>
-
-    <div id="teacher-response-area" class="teacher-panel p-3 mb-4 overflow-y-auto" style="max-height: 200px;">
-        <p class="chat-bubble text-gray-700 text-sm">I'm here to explain concepts. Click the speaker icon 🔇 to hear me talk!</p>
-    </div>
-    <div id="teacher-loading-indicator" class="hidden text-center mt-2">
-        <p class="text-sm text-primary-blue">Fetching conceptual data...</p>
-    </div>
-</div>
-
             </div>
 
             <!-- ====== COLUMN 2 & 3: WORKSPACE, GUIDE, and RESULTS (Maximized) ====== -->
@@ -575,39 +764,48 @@
                         <canvas id="circuit-canvas" class="w-full" width="800" height="400"></canvas>
                     </div>
                 </div>
-                
-                <!-- 2. Friend Assistant (GUIDANCE - MOVED TO THE WORKSPACE COLUMN) -->
-                <div id="friend-panel-container" class="bg-white p-4 rounded-xl shadow-lg">
-                    <h3 class="text-lg font-bold mb-4 flex items-center text-success-green border-b pb-2">
-                        <span role="img" aria-label="friend" class="mr-2 text-xl">🤖</span> Friend Assistant (Real-Time Guide)
-                    </h3>
-                    <div id="friend-response-area" class="friend-panel p-3 mb-4 overflow-y-auto" style="max-height: 180px;">
-                        <p class="chat-bubble text-gray-700 text-sm">I'm your guide! To start, select an experiment from the dropdown above.</p>
-                    </div>
 
-                    <!-- Transcribed Text Output (NEW) -->
-                    <div id="transcribed-text-output" class="text-sm font-semibold text-gray-600 bg-gray-100 p-2 rounded-lg mb-2 hidden">
-                        <!-- Transcription text will appear here -->
-                    </div>
-                    
-                    <!-- Text Input Query and Send Button -->
-                    <div class="flex space-x-2 mb-2">
-                        <input type="text" id="friend-text-query" placeholder="Ask a question or report an error..." 
-                               class="flex-grow rounded-lg p-2 text-sm text-gray-800 focus:ring-primary-blue focus:border-primary-blue border border-gray-300">
-                        <button id="send-friend-query-btn" class="bg-primary-blue hover:bg-blue-600 text-white font-bold py-2 px-3 rounded-lg transition duration-150 text-sm">
-                            Solve
-                        </button>
-                    </div>
+                <!-- Coming Soon placeholder (shown instead of the canvas for not-yet-built experiments) -->
+                <div id="coming-soon-panel" class="hidden bg-white rounded-xl shadow-2xl border-4 border-slate-300 flex flex-col items-center justify-center text-center p-12" style="min-height: 400px;">
+                    <span class="text-5xl mb-4">🚧</span>
+                    <h3 id="coming-soon-title" class="text-xl font-bold text-slate-700 mb-2"></h3>
+                    <p class="text-gray-500 max-w-md">This experiment isn't built yet. It's on the roadmap - pick a different experiment from the dropdown above for now.</p>
+                </div>
 
-                    <!-- Voice Input -->
-                    <div class="flex flex-col gap-2">
-                        <button id="start-voice-chat-btn" class="w-full bg-red-400 hover:bg-red-500 text-white font-bold py-2 rounded-lg transition duration-150">
-                            <span role="img" aria-label="mic">🎙️</span> START VOICE CHAT
-                        </button>
-                    </div>
-                    
-                    <div id="friend-loading-indicator" class="hidden text-center mt-2">
-                        <p class="text-sm text-primary-blue">Thinking...</p>
+                <!-- Measurements Lab: Function Generator + CRO (only visible for the Measurements experiment) -->
+                <div id="measurements-panel" class="hidden bg-white p-4 rounded-xl shadow-lg">
+                    <h3 class="text-lg font-semibold text-slate-800 mb-3 border-b pb-2">📟 Function Generator + CRO (Oscilloscope)</h3>
+                    <div class="flex flex-col md:flex-row gap-4">
+                        <div class="md:w-1/3 space-y-3">
+                            <label class="block text-sm">
+                                <span class="text-gray-700 font-semibold">Waveform</span>
+                                <select id="fg-waveform" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2 border text-sm">
+                                    <option value="sine">Sine</option>
+                                    <option value="square">Square</option>
+                                    <option value="triangle">Triangle</option>
+                                </select>
+                            </label>
+                            <label class="block text-sm">
+                                <span class="text-gray-700 font-semibold">Frequency: <span id="fg-freq-label">1000</span> Hz</span>
+                                <input type="range" id="fg-frequency" min="10" max="5000" value="1000" step="10" class="w-full">
+                            </label>
+                            <label class="block text-sm">
+                                <span class="text-gray-700 font-semibold">Amplitude: <span id="fg-amp-label">5.0</span> V</span>
+                                <input type="range" id="fg-amplitude" min="0.5" max="10" value="5" step="0.5" class="w-full">
+                            </label>
+                            <label class="block text-sm">
+                                <span class="text-gray-700 font-semibold">Time/Div: <span id="fg-timediv-label">0.2</span> ms</span>
+                                <input type="range" id="fg-timediv" min="0.05" max="1" value="0.2" step="0.05" class="w-full">
+                            </label>
+                        </div>
+                        <div class="md:w-2/3">
+                            <canvas id="cro-canvas" width="500" height="220" class="digital-screen w-full rounded"></canvas>
+                            <div class="grid grid-cols-3 gap-2 mt-2 text-xs font-mono text-center">
+                                <div class="bg-slate-100 rounded p-1">Vpp: <span id="cro-vpp" class="font-bold text-primary-blue">10.0 V</span></div>
+                                <div class="bg-slate-100 rounded p-1">Freq: <span id="cro-freq" class="font-bold text-primary-blue">1000 Hz</span></div>
+                                <div class="bg-slate-100 rounded p-1">Period: <span id="cro-period" class="font-bold text-primary-blue">1.00 ms</span></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -927,15 +1125,31 @@
                         
                         <div class="bg-white p-3 rounded-xl shadow border border-gray-200">
                             <h3 class="font-bold text-sm text-slate-800 mb-2 border-b pb-1">Parts Box</h3>
-                            <div class="grid grid-cols-2 gap-1.5 overflow-y-auto max-h-[180px] pr-1">
-                                <button onclick="startPlacing('Battery')" class="bg-slate-100 hover:bg-blue-200 text-xs font-bold py-1.5 rounded border border-gray-300 shadow-sm transition">🔋 Battery</button>
-                                <button onclick="startPlacing('Resistor')" class="bg-slate-100 hover:bg-blue-200 text-xs font-bold py-1.5 rounded border border-gray-300 shadow-sm transition">〰️ Resistor</button>
-                                <button onclick="startPlacing('Capacitor')" class="bg-slate-100 hover:bg-blue-200 text-xs font-bold py-1.5 rounded border border-gray-300 shadow-sm transition">|| Capacitor</button>
-                                <button onclick="startPlacing('Diode')" class="bg-slate-100 hover:bg-blue-200 text-xs font-bold py-1.5 rounded border border-gray-300 shadow-sm transition">▶| Diode</button>
-                                <button onclick="startPlacing('LED')" class="bg-slate-100 hover:bg-blue-200 text-xs font-bold py-1.5 rounded border border-gray-300 shadow-sm transition">💡 LED</button>
-                                <button onclick="startPlacing('Switch')" class="bg-slate-100 hover:bg-blue-200 text-xs font-bold py-1.5 rounded border border-gray-300 shadow-sm transition">🔌 Switch</button>
-                                <button onclick="startPlacing('Wire')" class="bg-yellow-100 hover:bg-yellow-300 text-slate-800 text-xs font-bold py-1.5 rounded border border-yellow-400 shadow-sm transition">➖ Wire</button>
-                                <button onclick="activateDeleteTool()" class="bg-red-100 hover:bg-red-300 text-red-800 text-xs font-bold py-1.5 rounded border border-red-400 shadow-sm transition">🗑️ Delete</button>
+                            <div class="grid grid-cols-3 gap-2 overflow-y-auto max-h-[200px] pr-1">
+                                <button onclick="startPlacing('Battery')" class="bg-slate-50 hover:bg-blue-50 hover:border-blue-300 text-slate-700 transition">
+                                    <span class="text-lg">🔋</span><span>Battery</span>
+                                </button>
+                                <button onclick="startPlacing('Resistor')" class="bg-slate-50 hover:bg-blue-50 hover:border-blue-300 text-slate-700 transition">
+                                    <span class="text-lg">🟫</span><span>Resistor</span>
+                                </button>
+                                <button onclick="startPlacing('Capacitor')" class="bg-slate-50 hover:bg-blue-50 hover:border-blue-300 text-slate-700 transition">
+                                    <span class="text-lg">⏸️</span><span>Capacitor</span>
+                                </button>
+                                <button onclick="startPlacing('Diode')" class="bg-slate-50 hover:bg-blue-50 hover:border-blue-300 text-slate-700 transition">
+                                    <span class="text-lg">⏩</span><span>Diode</span>
+                                </button>
+                                <button onclick="startPlacing('LED')" class="bg-slate-50 hover:bg-blue-50 hover:border-blue-300 text-slate-700 transition">
+                                    <span class="text-lg">💡</span><span>LED</span>
+                                </button>
+                                <button onclick="startPlacing('Switch')" class="bg-slate-50 hover:bg-blue-50 hover:border-blue-300 text-slate-700 transition">
+                                    <span class="text-lg">🔌</span><span>Switch</span>
+                                </button>
+                                <button onclick="startPlacing('Wire')" class="bg-yellow-50 hover:bg-yellow-100 hover:border-yellow-400 text-slate-800 transition">
+                                    <span class="text-lg">➖</span><span>Wire</span>
+                                </button>
+                                <button onclick="activateDeleteTool()" class="bg-red-50 hover:bg-red-100 hover:border-red-400 text-red-700 transition">
+                                    <span class="text-lg">🗑️</span><span>Delete</span>
+                                </button>
                             </div>
                         </div>
 
@@ -984,6 +1198,79 @@
 
     </div>
 </div>
+    <!-- ====== RIGHT-SIDE ASSISTANT DRAWER (Teacher + Friend Assistant) ====== -->
+    <button id="assistant-drawer-toggle" onclick="toggleAssistantDrawer()" title="Show/Hide Assistants">🤖 ▶</button>
+    <div id="assistant-drawer">
+        <div class="flex justify-between items-center mb-4">
+            <h2 class="text-base font-bold text-slate-800">AI Assistants</h2>
+            <button onclick="toggleAssistantDrawer()" class="text-gray-400 hover:text-slate-700 text-xl font-bold leading-none px-2" title="Close">×</button>
+        </div>
+
+        <!-- 1. Teacher Assistant (Concept Explanation) -->
+        <div id="teacher-panel-container" class="bg-white p-4 rounded-xl shadow-lg mb-6">
+            <div class="flex justify-between items-center mb-4 border-b pb-2">
+                <h3 class="text-lg font-bold flex items-center text-primary-blue">
+                    <span role="img" aria-label="teacher" class="mr-2 text-xl">🎓</span> Teacher Assistant
+                </h3>
+                <button id="teacher-speak-toggle" class="text-gray-400 hover:text-primary-blue transition-colors font-bold text-lg p-1 border border-gray-200 rounded" title="Toggle Voice Explanation">
+                    <span id="speaker-icon">🔇</span>
+                </button>
+            </div>
+
+            <div id="teacher-response-area" class="teacher-panel p-3 mb-4 overflow-y-auto" style="max-height: 200px;">
+                <p class="chat-bubble text-gray-700 text-sm">I'm here to explain concepts. Click the speaker icon 🔇 to hear me talk!</p>
+            </div>
+            <div id="teacher-loading-indicator" class="hidden text-center mt-2">
+                <p class="text-sm text-primary-blue">Fetching conceptual data...</p>
+            </div>
+        </div>
+
+        <!-- 2. Friend Assistant (Real-Time Step-by-Step Guide) -->
+        <div id="friend-panel-container" class="bg-white p-4 rounded-xl shadow-lg">
+            <h3 class="text-lg font-bold mb-4 flex items-center text-success-green border-b pb-2">
+                <span role="img" aria-label="friend" class="mr-2 text-xl">🤖</span> Friend Assistant (Step-by-Step Guide)
+            </h3>
+            <div id="friend-response-area" class="friend-panel p-3 mb-4 overflow-y-auto" style="max-height: 180px;">
+                <p class="chat-bubble text-gray-700 text-sm">I'm your guide! To start, select an experiment from the dropdown above.</p>
+            </div>
+
+            <!-- Transcribed Text Output -->
+            <div id="transcribed-text-output" class="text-sm font-semibold text-gray-600 bg-gray-100 p-2 rounded-lg mb-2 hidden">
+                <!-- Transcription text will appear here -->
+            </div>
+
+            <!-- Text Input Query and Send Button -->
+            <div class="flex space-x-2 mb-2">
+                <input type="text" id="friend-text-query" placeholder="Ask a question or report an error..."
+                       class="flex-grow rounded-lg p-2 text-sm text-gray-800 focus:ring-primary-blue focus:border-primary-blue border border-gray-300">
+                <button id="send-friend-query-btn" class="bg-primary-blue hover:bg-blue-600 text-white font-bold py-2 px-3 rounded-lg transition duration-150 text-sm">
+                    Solve
+                </button>
+            </div>
+
+            <!-- Voice Input -->
+            <div class="flex flex-col gap-2">
+                <button id="start-voice-chat-btn" class="w-full bg-red-400 hover:bg-red-500 text-white font-bold py-2 rounded-lg transition duration-150">
+                    <span role="img" aria-label="mic">🎙️</span> START VOICE CHAT
+                </button>
+            </div>
+
+            <div id="friend-loading-indicator" class="hidden text-center mt-2">
+                <p class="text-sm text-primary-blue">Thinking...</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleAssistantDrawer() {
+            const drawer = document.getElementById('assistant-drawer');
+            const toggle = document.getElementById('assistant-drawer-toggle');
+            const isClosed = drawer.classList.toggle('closed');
+            toggle.classList.toggle('drawer-closed', isClosed);
+            toggle.textContent = isClosed ? '🤖 ◀' : '🤖 ▶';
+        }
+    </script>
+
     <script>
         // --- Custom Modal Functions (Replace alert and confirm) ---
         /**
@@ -1039,27 +1326,100 @@
         // --- Experiment Definitions & Global State ---
 
         const EXPERIMENTS = {
-            // 👇 NEW DEFINITION ADDED
             EXP_1_THEORY: {
                 name: "1. Study of Active & Passive Components",
                 goal: "Explore the theory of Resistors, Capacitors, and Semiconductors in the study window.",
+                steps: []
             },
-            // ... (Keep your other experiments below exactly as they were) ...
+            MEASUREMENTS: {
+                name: "2. Measurements: CRO, Function Generator & Digital Multimeter",
+                goal: "Use the Function Generator + CRO to observe an AC waveform, and the Digital Multimeter to measure DC voltage and resistance.",
+                steps: [
+                    { text: "Click the Battery button to place a 9V source on the canvas.", check: s => s.components.some(c => c.type === 'Battery'), expect: { kind: 'place', type: 'Battery' } },
+                    { text: "Click the Resistor button to place a resistor to measure.", check: s => s.components.some(c => c.type === 'Resistor'), expect: { kind: 'place', type: 'Resistor' } },
+                    { text: "Click the Multimeter button to place it on the canvas.", check: s => s.components.some(c => c.type === 'Multimeter'), expect: { kind: 'place', type: 'Multimeter' } },
+                    { text: "Wire the Multimeter across the Resistor (2 connections).", check: s => { const m = s.components.find(c => c.type === 'Multimeter'); return m && m.node0Connected && m.node1Connected; }, expect: { kind: 'wire' } },
+                    { text: "Select the Multimeter, choose Voltmeter or Ohmmeter mode, then Save.", check: s => { const m = s.components.find(c => c.type === 'Multimeter'); return m && m.mode && m.mode !== 'None'; }, expect: { kind: 'mode' } },
+                    { text: "Click 'EXECUTE ANALYSIS' to take the reading.", check: s => s.hasRun, expect: { kind: 'run' } },
+                    { text: "Now try the Function Generator + CRO panel below to view an AC waveform.", check: s => false, expect: null }
+                ]
+            },
+            DIODE_VI: {
+                name: "3. V-I Characteristics of PN Junction Diode",
+                goal: "Coming soon: plot the forward/reverse V-I curve of a PN junction diode.",
+                comingSoon: true, steps: []
+            },
+            RECTIFIER: {
+                name: "4. Rectifier Circuits: Bridge Rectifier DC Power Supply",
+                goal: "Coming soon: build a bridge rectifier and observe the regulated DC output.",
+                comingSoon: true, steps: []
+            },
+            CE_AMPLIFIER: {
+                name: "5. Common Emitter (CE) BJT Amplifier & Gain Calculation",
+                goal: "Coming soon: build a CE amplifier and calculate its voltage gain.",
+                comingSoon: true, steps: []
+            },
+            OPAMP: {
+                name: "6. Op-Amp Linear Applications (Inverting/Non-Inverting)",
+                goal: "Coming soon: build inverting and non-inverting amplifiers using an Op-Amp 741.",
+                comingSoon: true, steps: []
+            },
+            LOGIC_GATES: {
+                name: "7. Logic Gates & Half/Full Adder Truth Tables",
+                goal: "Place an IC Logic Chip, Digital Input, and Digital Output to verify truth tables.",
+                steps: [
+                    { text: "Click the IC button and select a 74LS logic chip to place.", check: s => s.components.some(c => c.type === 'IC'), expect: { kind: 'place', type: 'IC' } },
+                    { text: "Place a Digital Input component and wire it to an IC input pin.", check: s => s.components.some(c => c.type === 'DigitalInput'), expect: { kind: 'place', type: 'DigitalInput' } },
+                    { text: "Place a Digital Output component and wire it to the IC output pin.", check: s => s.components.some(c => c.type === 'DigitalOutput'), expect: { kind: 'place', type: 'DigitalOutput' } },
+                    { text: "Wire the components together (at least 2 wires).", check: s => s.wireCount >= 2, expect: { kind: 'wire' } },
+                    { text: "Toggle the Digital Inputs, then click 'EXECUTE ANALYSIS' to check the truth table.", check: s => s.hasRun, expect: { kind: 'run' } }
+                ]
+            },
+            // --- Bonus practice circuits (kept from the original sandbox) ---
             OHMS_LAW: {
-                name: "2. DC Analysis: Ohm's Law - Simple Series Circuit",
+                name: "Bonus Practice: DC Analysis - Ohm's Law (Series Circuit)",
                 goal: "Construct a closed series circuit using a 9V Battery and a single 220Ω Resistor.",
+                steps: [
+                    { text: "Click the Battery button to place a 9V Battery on the canvas.", check: s => s.components.some(c => c.type === 'Battery'), expect: { kind: 'place', type: 'Battery' } },
+                    { text: "Click the Resistor button to place a 220Ω Resistor on the canvas.", check: s => s.components.some(c => c.type === 'Resistor'), expect: { kind: 'place', type: 'Resistor' } },
+                    { text: "Click the Battery's terminal, then one end of the Resistor, to wire them.", check: s => { const b = s.components.find(c => c.type === 'Battery'); const r = s.components.find(c => c.type === 'Resistor'); return !!(b && r && (b.node0Connected || b.node1Connected) && (r.node0Connected || r.node1Connected)); }, expect: { kind: 'wire' } },
+                    { text: "Wire the Resistor's other end back to the Battery to close the loop.", check: s => { const b = s.components.find(c => c.type === 'Battery'); const r = s.components.find(c => c.type === 'Resistor'); return !!(b && r && b.node0Connected && b.node1Connected && r.node0Connected && r.node1Connected); }, expect: { kind: 'wire' } },
+                    { text: "Click 'EXECUTE ANALYSIS' to run the simulation and check the current.", check: s => s.hasRun, expect: { kind: 'run' } }
+                ]
             },
             MOSFET_SWITCH: {
-                name: "3. MOSFET Switching Circuit (Complex)",
+                name: "Bonus Practice: MOSFET Switching Circuit",
                 goal: "Use a Resistor and an LED in series with the MOSFET's Drain and Source. Connect Gate to VCC.",
+                steps: [
+                    { text: "Place a MOSFET component on the canvas.", check: s => s.components.some(c => c.type === 'MOSFET'), expect: { kind: 'place', type: 'MOSFET' } },
+                    { text: "Place a Resistor to wire in series with an LED.", check: s => s.components.some(c => c.type === 'Resistor'), expect: { kind: 'place', type: 'Resistor' } },
+                    { text: "Place an LED to wire after the Resistor.", check: s => s.components.some(c => c.type === 'LED'), expect: { kind: 'place', type: 'LED' } },
+                    { text: "Place a VCC Rail and a Ground reference.", check: s => s.components.some(c => c.type === 'VCC') && s.components.some(c => c.type === 'Ground'), expect: { kind: 'place', type: 'VCC' } },
+                    { text: "Wire VCC → Resistor → LED → MOSFET Drain, Source → Ground, Gate → VCC.", check: s => s.wireCount >= 4, expect: { kind: 'wire' } },
+                    { text: "Click 'EXECUTE ANALYSIS' to confirm the LED turns on.", check: s => s.hasRun, expect: { kind: 'run' } }
+                ]
             },
             CS_AMPLIFIER: {
-                name: "4. Single Stage CS Amplifier (DC Bias)",
+                name: "Bonus Practice: Common Source Amplifier (DC Bias)",
                 goal: "Construct the DC biasing network for a Common Source amplifier.",
+                steps: [
+                    { text: "Place a Battery/VCC source on the canvas.", check: s => s.components.some(c => c.type === 'Battery' || c.type === 'VCC'), expect: { kind: 'place', type: 'Battery' } },
+                    { text: "Place two Resistors to form the Gate voltage-divider.", check: s => s.components.filter(c => c.type === 'Resistor').length >= 2, expect: { kind: 'place', type: 'Resistor' } },
+                    { text: "Place the MOSFET for the amplifier stage.", check: s => s.components.some(c => c.type === 'MOSFET'), expect: { kind: 'place', type: 'MOSFET' } },
+                    { text: "Wire the divider, Drain resistor, and Source to Ground (at least 4 wires).", check: s => s.wireCount >= 4, expect: { kind: 'wire' } },
+                    { text: "Click 'EXECUTE ANALYSIS' to check the DC bias point.", check: s => s.hasRun, expect: { kind: 'run' } }
+                ]
             },
             DIGITAL_LOGIC: {
-                name: "5. Digital Logic (Conceptual IC Testing)",
+                name: "Bonus Practice: Conceptual IC Testing",
                 goal: "Place an IC Logic Chip, Digital Input, and Digital Output to test logic gates.",
+                steps: [
+                    { text: "Click the IC button and select a 74LS logic chip to place.", check: s => s.components.some(c => c.type === 'IC'), expect: { kind: 'place', type: 'IC' } },
+                    { text: "Place a Digital Input component and wire it to an IC input pin.", check: s => s.components.some(c => c.type === 'DigitalInput'), expect: { kind: 'place', type: 'DigitalInput' } },
+                    { text: "Place a Digital Output component and wire it to the IC output pin.", check: s => s.components.some(c => c.type === 'DigitalOutput'), expect: { kind: 'place', type: 'DigitalOutput' } },
+                    { text: "Wire the components together (at least 2 wires).", check: s => s.wireCount >= 2, expect: { kind: 'wire' } },
+                    { text: "Toggle the Digital Inputs, then click 'EXECUTE ANALYSIS' to verify.", check: s => s.hasRun, expect: { kind: 'run' } }
+                ]
             }
         };
 
@@ -1267,7 +1627,81 @@ async function sendMessageToGemini(inputParam) {
             document.getElementById('experiment-select').value = currentExperimentKey;
 
             resizeCanvas();
+            initFunctionGeneratorCRO();
         };
+
+        /**
+         * Function Generator + CRO (oscilloscope): a real, independent
+         * instrument - not part of the DC netlist solver. It draws the
+         * actual waveform live on a canvas based on the generator's
+         * waveform/frequency/amplitude/time-div controls, exactly like a
+         * real benchtop CRO would display what the generator produces.
+         */
+        function initFunctionGeneratorCRO() {
+            const waveformSel = document.getElementById('fg-waveform');
+            const freqSlider = document.getElementById('fg-frequency');
+            const ampSlider = document.getElementById('fg-amplitude');
+            const timeDivSlider = document.getElementById('fg-timediv');
+            const canvas = document.getElementById('cro-canvas');
+            if (!waveformSel || !canvas) return; // Panel not present in this build state
+            const ctx = canvas.getContext('2d');
+
+            function drawGrid() {
+                const w = canvas.width, h = canvas.height;
+                ctx.strokeStyle = 'rgba(34, 197, 94, 0.15)';
+                ctx.lineWidth = 1;
+                for (let x = 0; x <= w; x += w / 10) { ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, h); ctx.stroke(); }
+                for (let y = 0; y <= h; y += h / 8) { ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(w, y); ctx.stroke(); }
+                ctx.strokeStyle = 'rgba(34, 197, 94, 0.4)';
+                ctx.beginPath(); ctx.moveTo(0, h / 2); ctx.lineTo(w, h / 2); ctx.stroke();
+            }
+
+            function waveformValue(type, phase) {
+                const t = phase % 1;
+                switch (type) {
+                    case 'square': return t < 0.5 ? 1 : -1;
+                    case 'triangle': return t < 0.5 ? (4 * t - 1) : (3 - 4 * t);
+                    default: return Math.sin(2 * Math.PI * t); // sine
+                }
+            }
+
+            function drawWave() {
+                const w = canvas.width, h = canvas.height;
+                ctx.clearRect(0, 0, w, h);
+                drawGrid();
+
+                const type = waveformSel.value;
+                const freq = parseFloat(freqSlider.value);       // Hz
+                const amp = parseFloat(ampSlider.value);         // V
+                const timeDiv = parseFloat(timeDivSlider.value); // ms per division (10 divisions across)
+                const totalTimeMs = timeDiv * 10;
+                const periodMs = 1000 / freq;
+
+                document.getElementById('fg-freq-label').textContent = freq.toFixed(0);
+                document.getElementById('fg-amp-label').textContent = amp.toFixed(1);
+                document.getElementById('fg-timediv-label').textContent = timeDiv.toFixed(2);
+                document.getElementById('cro-vpp').textContent = `${(amp * 2).toFixed(1)} V`;
+                document.getElementById('cro-freq').textContent = `${freq.toFixed(0)} Hz`;
+                document.getElementById('cro-period').textContent = `${periodMs.toFixed(2)} ms`;
+
+                ctx.strokeStyle = '#4ade80';
+                ctx.lineWidth = 2;
+                ctx.beginPath();
+                for (let px = 0; px <= w; px++) {
+                    const tMs = (px / w) * totalTimeMs;
+                    const phase = tMs / periodMs;
+                    const v = waveformValue(type, phase) * amp;
+                    const py = h / 2 - (v / 10) * (h / 2) * 0.85; // scale so +/-10V roughly fits the screen
+                    if (px === 0) ctx.moveTo(px, py); else ctx.lineTo(px, py);
+                }
+                ctx.stroke();
+            }
+
+            [waveformSel, freqSlider, ampSlider, timeDivSlider].forEach(el => {
+                el.addEventListener('input', drawWave);
+            });
+            drawWave();
+        }
 
 
         /**
@@ -1380,33 +1814,65 @@ async function sendMessageToGemini(inputParam) {
             ctx.lineWidth = 2;
 
             if (comp.type === 'Resistor') {
-                // Resistor: Zig-zag symbol
-                ctx.beginPath();
-                const num_segments = 7;
-                const segment_width = componentLength / (num_segments - 1);
-                const zig_zag_height = 10;
-                
-                // Draw connecting leads
-                ctx.moveTo(-halfW, 0);
-                ctx.lineTo(-componentLength / 2, 0);
-                ctx.moveTo(componentLength / 2, 0);
-                ctx.lineTo(halfW, 0);
+                // Real-world style: tan/beige body with color bands + leads
+                const bodyW = componentLength * 0.62;
+                const bodyH = 15;
 
-                // Draw the zig-zag
-                ctx.moveTo(-componentLength / 2, 0);
-                for (let i = 0; i < num_segments; i++) {
-                    const x = -componentLength / 2 + i * segment_width;
-                    const y = i % 2 === 0 ? 0 : (i % 4 === 1 ? zig_zag_height : -zig_zag_height);
-                    if (i > 0 && i < num_segments - 1) {
-                        ctx.lineTo(x, y);
-                    }
-                }
-                ctx.lineTo(componentLength / 2, 0);
+                // Leads
+                ctx.strokeStyle = '#94a3b8';
+                ctx.lineWidth = 2;
+                ctx.beginPath();
+                ctx.moveTo(-halfW, 0);
+                ctx.lineTo(-bodyW / 2, 0);
+                ctx.moveTo(bodyW / 2, 0);
+                ctx.lineTo(halfW, 0);
                 ctx.stroke();
 
+                // Body (rounded rect, tan)
+                ctx.fillStyle = '#e8c496';
+                ctx.strokeStyle = '#a9865a';
+                ctx.lineWidth = 1.5;
+                const r = 6;
+                ctx.beginPath();
+                ctx.moveTo(-bodyW / 2 + r, -bodyH / 2);
+                ctx.lineTo(bodyW / 2 - r, -bodyH / 2);
+                ctx.arcTo(bodyW / 2, -bodyH / 2, bodyW / 2, -bodyH / 2 + r, r);
+                ctx.lineTo(bodyW / 2, bodyH / 2 - r);
+                ctx.arcTo(bodyW / 2, bodyH / 2, bodyW / 2 - r, bodyH / 2, r);
+                ctx.lineTo(-bodyW / 2 + r, bodyH / 2);
+                ctx.arcTo(-bodyW / 2, bodyH / 2, -bodyW / 2, bodyH / 2 - r, r);
+                ctx.lineTo(-bodyW / 2, -bodyH / 2 + r);
+                ctx.arcTo(-bodyW / 2, -bodyH / 2, -bodyW / 2 + r, -bodyH / 2, r);
+                ctx.closePath();
+                ctx.fill();
+                ctx.stroke();
+
+                // Color bands (visual only - derived from value for a bit of realism)
+                const bandColors = ['#8B4513', '#000000', '#DC2626', '#D4AF37']; // brown, black, red, gold (tolerance)
+                const bandXs = [-bodyW * 0.28, -bodyW * 0.10, bodyW * 0.10, bodyW * 0.32];
+                bandXs.forEach((bx, i) => {
+                    ctx.fillStyle = bandColors[i];
+                    ctx.fillRect(bx - 1.5, -bodyH / 2, 3, bodyH);
+                });
+
             } else if (comp.type === 'Battery') {
-                // Battery: Long/short bar symbol
+                // Real-world style: small cell casing behind the +/- bars
                 const bar_width = 25;
+                const caseW = componentLength * 0.5;
+                const caseH = 18;
+
+                ctx.fillStyle = '#dbeafe';
+                ctx.strokeStyle = '#1d4ed8';
+                ctx.lineWidth = 1.5;
+                ctx.beginPath();
+                ctx.roundRect ? ctx.roundRect(-caseW / 2, -caseH / 2, caseW, caseH, 4) : ctx.rect(-caseW / 2, -caseH / 2, caseW, caseH);
+                ctx.fill();
+                ctx.stroke();
+                ctx.fillStyle = '#1d4ed8';
+                ctx.font = 'bold 10px sans-serif';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillText('9V', 0, 0);
 
                 // Positive terminal (Node 1 - Right side)
                 ctx.strokeStyle = '#000';
@@ -1453,24 +1919,22 @@ async function sendMessageToGemini(inputParam) {
                 ctx.stroke();
 
             } else if (comp.type === 'Capacitor') {
-                // Capacitor: Two parallel lines
-                ctx.strokeStyle = def.color;
-                ctx.lineWidth = 4;
-                ctx.beginPath();
-                ctx.moveTo(-componentLength / 2 + 5, -halfH);
-                ctx.lineTo(-componentLength / 2 + 5, halfH);
-                ctx.moveTo(componentLength / 2 - 5, -halfH);
-                ctx.lineTo(componentLength / 2 - 5, halfH);
-                ctx.stroke();
-                ctx.lineWidth = 2;
+                // Real-world style: small ceramic disc body + leads
                 ctx.strokeStyle = '#000';
-                
-                // Connecting leads
+                ctx.lineWidth = 2;
                 ctx.beginPath();
                 ctx.moveTo(-halfW, 0);
-                ctx.lineTo(-componentLength / 2 + 5, 0);
-                ctx.moveTo(componentLength / 2 - 5, 0);
+                ctx.lineTo(-11, 0);
+                ctx.moveTo(11, 0);
                 ctx.lineTo(halfW, 0);
+                ctx.stroke();
+
+                ctx.fillStyle = '#60a5fa';
+                ctx.strokeStyle = '#1e40af';
+                ctx.lineWidth = 1.5;
+                ctx.beginPath();
+                ctx.ellipse(0, 0, 11, halfH * 0.9, 0, 0, Math.PI * 2);
+                ctx.fill();
                 ctx.stroke();
             } else if (comp.type === 'LED') {
                 // LED: Circle/Bulb shape with arrows
@@ -1591,19 +2055,38 @@ async function sendMessageToGemini(inputParam) {
                 ctx.fillStyle = comp.state.gateOn ? '#93C5FD' : '#FFFFFF';
                 ctx.fillRect(channelX - 1, -halfH + 5, 2, halfH * 2 - 10);
 
-            } else if (comp.type === 'IC' || comp.type === 'DigitalInput' || comp.type === 'DigitalOutput') {
-                // IC and Digital I/O: Simple Rectangular Chip/Interface
+            } else if (comp.type === 'IC') {
+                // Real-world style: black DIP chip body with pin legs + notch
+                ctx.fillStyle = '#1f2937';
+                ctx.strokeStyle = '#000';
+                ctx.lineWidth = 1.5;
+                ctx.fillRect(-halfW, -halfH, def.width, def.height);
+                ctx.strokeRect(-halfW, -halfH, def.width, def.height);
+
+                // Pin legs along top and bottom edges
+                ctx.fillStyle = '#c0c0c0';
+                const legCount = 4;
+                for (let i = 0; i < legCount; i++) {
+                    const lx = -halfW + (def.width / (legCount + 1)) * (i + 1);
+                    ctx.fillRect(lx - 1.5, -halfH - 5, 3, 5);
+                    ctx.fillRect(lx - 1.5, halfH, 3, 5);
+                }
+
+                // Pin-1 notch (top-left corner dot, standard DIP convention)
+                ctx.beginPath();
+                ctx.arc(-halfW + 6, -halfH, 5, Math.PI, 0, false);
+                ctx.fillStyle = '#1f2937';
+                ctx.fill();
+                ctx.beginPath();
+                ctx.arc(-halfW + 6, -halfH + 6, 2.5, 0, Math.PI * 2);
+                ctx.fillStyle = '#9ca3af';
+                ctx.fill();
+
+            } else if (comp.type === 'DigitalInput' || comp.type === 'DigitalOutput') {
+                // Digital I/O: Simple Rectangular Interface
                 ctx.fillStyle = def.color;
                 ctx.fillRect(-halfW, -halfH, def.width, def.height);
                 ctx.strokeRect(-halfW, -halfH, def.width, def.height);
-                
-                // Draw pin notch (top center) for IC only
-                if (comp.type === 'IC') {
-                    ctx.beginPath();
-                    ctx.arc(0, -halfH, 5, Math.PI, 0, false);
-                    ctx.fillStyle = '#000';
-                    ctx.fill();
-                }
 
             } else if (comp.type === 'VCC') {
                 // VCC Rail Symbol (Triangle/Arrow up, centered)
@@ -2542,8 +3025,9 @@ async function sendMessageToGemini(inputParam) {
 
         /** Runs the DC circuit simulation based on Ohm's Law and component states. */
         function runSimulation() {
+            hasRunSimulation = true;
             // If in Digital Logic mode, skip complex DC calculations and run conceptual update
-            if (currentExperimentKey === 'DIGITAL_LOGIC') {
+            if (currentExperimentKey === 'DIGITAL_LOGIC' || currentExperimentKey === 'LOGIC_GATES') {
                 runDigitalSimulation();
                 return;
             }
@@ -2734,6 +3218,28 @@ async function sendMessageToGemini(inputParam) {
                          meter.state.reading = '--';
                     }
                 }
+                else if (meter.state.mode === 'Ω') {
+                    if (meterConnections.length === 2) {
+                        const connectedComponentId = meterConnections
+                            .map(c => c.from.id === meter.id ? c.to.id : c.from.id)
+                            .find((id, index, self) => self.indexOf(id) === index && id !== meter.id);
+                        const connectedComponent = components.find(c => c.id === connectedComponentId);
+                        if (connectedComponent && ComponentTypes[connectedComponent.type].R_equiv) {
+                            const R_comp = ComponentTypes[connectedComponent.type].R_equiv(connectedComponent.value);
+                            meter.state.reading = (R_comp === Infinity) ? '--' : R_comp;
+                            if (R_comp !== Infinity) {
+                                maxMeterReading = Math.max(maxMeterReading, meter.state.reading);
+                                maxMeterUnit = 'Ω';
+                                isMeterUsed = true;
+                            }
+                        } else {
+                            meter.state.reading = '--';
+                        }
+                    } else {
+                        meter.state.reading = '--';
+                    }
+                }
+
             });
 
             multimeterOutput.textContent = isMeterUsed ? `MULTIMETER: ${maxMeterReading.toFixed(3)}${maxMeterUnit}` : 'MULTIMETER: --';
@@ -2748,11 +3254,17 @@ async function sendMessageToGemini(inputParam) {
         // --- Core Application Functions ---
         
         /** Resets the entire circuit and simulation state. */
+        let hasRunSimulation = false; // tracks whether "EXECUTE ANALYSIS" has been clicked since last reset
+        let friendStepIndex = 0;      // which ordered step of the current experiment we're on
+        let lastFriendSnapshot = null; // previous circuit snapshot, used to detect wrong-step mistakes
+
         function resetCircuit() {
             components = [];
             placingComponent = null;
             selectedComponent = null;
             connectingNode = null;
+            hasRunSimulation = false;
+            friendStepIndex = 0; lastFriendSnapshot = null;
             // Reset Digital I/O state
             digitalInputs = Array(NUM_DIGITAL_IO).fill(0);
             digitalOutputs = Array(NUM_DIGITAL_IO).fill(0);
@@ -2768,6 +3280,7 @@ async function sendMessageToGemini(inputParam) {
         function updateExperiment(key) {
             currentExperimentKey = key;
             const exp = EXPERIMENTS[key];
+            friendStepIndex = 0; lastFriendSnapshot = null;
             
             // 1. Update Title and Goal Text
             currentGoalText = exp.goal;
@@ -2778,7 +3291,7 @@ async function sendMessageToGemini(inputParam) {
             const analogPanel = document.getElementById('simulation-results-card');
             const digitalPanel = document.getElementById('digital-interface-panel');
             
-            if (key === 'DIGITAL_LOGIC') {
+            if (key === 'DIGITAL_LOGIC' || key === 'LOGIC_GATES') {
                 analogPanel.classList.add('hidden');
                 digitalPanel.classList.remove('hidden');
             } else {
@@ -2786,11 +3299,39 @@ async function sendMessageToGemini(inputParam) {
                 digitalPanel.classList.add('hidden');
             }
 
-            // 3. 👇 NEW: Handle Experiment 1 Popup Logic
+            // 2b. Show/hide the Measurements-only Function Generator + CRO panel
+            const measurementsPanel = document.getElementById('measurements-panel');
+            if (measurementsPanel) {
+                measurementsPanel.classList.toggle('hidden', key !== 'MEASUREMENTS');
+            }
+
+            // 2c. Coming-soon experiments: show a friendly placeholder instead of the live canvas
+            const comingSoonPanel = document.getElementById('coming-soon-panel');
+            const canvasAnchor = document.getElementById('main-canvas-anchor');
+            if (comingSoonPanel && canvasAnchor) {
+                if (exp.comingSoon) {
+                    comingSoonPanel.classList.remove('hidden');
+                    canvasAnchor.classList.add('hidden');
+                    document.getElementById('coming-soon-title').textContent = exp.name;
+                } else {
+                    comingSoonPanel.classList.add('hidden');
+                    canvasAnchor.classList.remove('hidden');
+                }
+            }
+
+            // 3. Handle Experiment 1 Popup Logic
             if (key === 'EXP_1_THEORY') {
                 openExperimentOne(); // Open the window
             } else {
                 closeExperimentOne(); // Close it if they switch to something else
+            }
+
+            if (exp.comingSoon) {
+                const responseArea = document.getElementById('friend-response-area');
+                if (responseArea) {
+                    responseArea.innerHTML = `<p class="chat-bubble text-gray-700 text-sm">🚧 "${exp.name}" is coming soon - not built yet, so there's nothing to guide you through here.</p>`;
+                }
+                return;
             }
 
             // 4. Reset Circuit Logic
@@ -2900,10 +3441,13 @@ async function sendMessageToGemini(inputParam) {
          * @param {string} action - The last action performed by the user (or transcribed speech query).
          * @param {number} [frustrationLevel=3] - User's perceived frustration level (1=Calm, 10=Frustrated).
          */
-        async function callFriendAssistant(action, frustrationLevel = 3) {
-            lastAction = action; 
-            
-            // 1. Prepare Circuit State Context
+        /**
+         * Builds a plain, structured snapshot of what's really on the canvas
+         * right now (components + wiring + whether Run has been clicked),
+         * used both by the deterministic step-checks and by the LLM when a
+         * direct question needs answering.
+         */
+        function getCircuitSnapshot() {
             const simpleCircuitState = components
                 .filter(c => c.type !== 'Wire')
                 .map(c => ({
@@ -2911,80 +3455,189 @@ async function sendMessageToGemini(inputParam) {
                     node0Connected: components.some(w => w.type === 'Wire' && w.from && w.to && (w.from.id === c.id && w.from.node === 0 || w.to.id === c.id && w.to.node === 0)),
                     node1Connected: components.some(w => w.type === 'Wire' && w.from && w.to && (w.from.id === c.id && w.from.node === 1 || w.to.id === c.id && w.to.node === 1)),
                     node2Connected: c.type === 'MOSFET' ? components.some(w => w.type === 'Wire' && w.from && w.to && (w.from.id === c.id && w.from.node === 2 || w.to.id === c.id && w.to.node === 2)) : false,
-                    state: c.state ? JSON.stringify(c.state) : 'N/A' 
+                    mode: c.state && c.state.mode ? c.state.mode : null
                 }));
+            return {
+                components: simpleCircuitState,
+                wireCount: components.filter(c => c.type === 'Wire').length,
+                digitalInputs: digitalInputs,
+                hasRun: hasRunSimulation
+            };
+        }
 
-            const circuitContext = JSON.stringify(simpleCircuitState, null, 2);
-            const inputStateString = digitalInputs.join('');
-            
-            // 2. Adjust Guidance based on Frustration Level
-            let guidanceTone;
-            if (frustrationLevel >= 9) {
-                guidanceTone = "Student is EXTREMELY frustrated (9-10). Give the ABSOLUTE SIMPLEST single action (like 'Click Battery button' or 'Place component here'). ONE sentence ONLY. No explanations. Just tell them exactly what to do right now.";
-            } else if (frustrationLevel >= 7) {
-                guidanceTone = "Student is very frustrated (7-8). Give ONE simple step at a time with minimal explanation. Be direct and clear. Example: 'Place the Battery first, then add the Resistor.' Maximum 2 sentences.";
-            } else if (frustrationLevel >= 5) {
-                guidanceTone = "Student is frustrated (5-6). Give clear, simple 2-3 step guidance. Keep it straightforward and encouraging. Break down the task into easy actions.";
-            } else {
-                guidanceTone = "Student is calm (1-4). Give brief guidance or answer questions directly in 2-3 sentences. Include helpful context.";
+        function describeCircuitState(state) {
+            if (state.components.length === 0) return "The canvas is completely empty. No components have been placed yet.";
+            return state.components.map(c => {
+                const wired = [];
+                if (c.node0Connected) wired.push('terminal 1 wired');
+                if (c.node1Connected) wired.push('terminal 2 wired');
+                if (c.nodes >= 3 && c.node2Connected) wired.push('terminal 3 wired');
+                const wiredStr = wired.length ? wired.join(', ') : 'not wired yet';
+                const modeStr = c.mode && c.mode !== 'None' ? `, mode: ${c.mode}` : '';
+                return `- ${c.type}${c.value !== undefined ? ` (${c.value})` : ''}: ${wiredStr}${modeStr}.`;
+            }).join('\n');
+        }
+
+        function toSingleLine(text, maxLen = 160) {
+            if (!text) return text;
+            let t = text.replace(/\r?\n+/g, ' ').replace(/\s+/g, ' ').trim();
+            const firstSentence = t.match(/^.*?[.!?](?=\s|$)/);
+            if (firstSentence && firstSentence[0].length > 0) t = firstSentence[0];
+            if (t.length > maxLen) t = t.slice(0, maxLen - 1).trim() + '…';
+            return t;
+        }
+
+        /**
+         * Friend Assistant: reads the REAL canvas/circuit state and walks the
+         * student through the experiment's real steps one at a time.
+         * - Step progression is deterministic (based on the actual circuit),
+         *   never guessed by an LLM: a step only advances once its check()
+         *   passes against the real component/wire data.
+         * - The LLM is only called when the user asks an actual question or
+         *   reports being stuck (a "doubt"), so it can explain / help debug.
+         */
+        /**
+         * Compares the circuit snapshot BEFORE and AFTER the user's last
+         * action against what the current step actually expects. Returns a
+         * warning string if the action looks wrong, or null if it looks fine
+         * (or there isn't enough info yet to tell).
+         */
+        function detectMistake(step, prevSnapshot, snapshot) {
+            if (!step || !step.expect || !prevSnapshot) return null;
+
+            if (step.expect.kind === 'place') {
+                const prevIds = new Set(prevSnapshot.components.map(c => c.id));
+                const newComps = snapshot.components.filter(c => !prevIds.has(c.id));
+                const wrongComp = newComps.find(c => c.type !== step.expect.type);
+                if (wrongComp) {
+                    return `⚠️ That's a ${wrongComp.type}, not a ${step.expect.type} - this step needs a ${step.expect.type}. Delete it and place the right part.`;
+                }
             }
-            
-            // Detect if this is a direct question vs general action
+
+            if (step.expect.kind === 'wire') {
+                if (snapshot.wireCount > prevSnapshot.wireCount) {
+                    return `⚠️ That wire doesn't complete the connection this step needs yet - double check which terminals you joined.`;
+                }
+            }
+
+            if (step.expect.kind === 'mode') {
+                const prevMeter = prevSnapshot.components.find(c => c.type === 'Multimeter');
+                const meter = snapshot.components.find(c => c.type === 'Multimeter');
+                if (meter && prevMeter && meter.mode !== prevMeter.mode && (!meter.mode || meter.mode === 'None')) {
+                    return `⚠️ The Multimeter still needs a mode selected (Voltmeter or Ohmmeter) before you Save.`;
+                }
+            }
+
+            return null;
+        }
+
+        async function callFriendAssistant(action, frustrationLevel = 3) {
+            lastAction = action;
+            const responseArea = document.getElementById('friend-response-area');
+            const exp = EXPERIMENTS[currentExperimentKey];
+            const snapshot = getCircuitSnapshot();
             const isDirectQuestion = action.includes('typed a specific question') || action.includes('User spoke');
-            
-           // 3. Define the System Prompt
-// 3. Define the Detailed System Prompt
-            // 3. Define the Minimalist System Prompt
-// 3. Define the Strict Action-Only System Prompt
-const systemPrompt = `You are Friend Assistant, a direct hands-on lab partner.
-Current Experiment Goal: ${currentGoalText}.
-Digital Inputs: ${inputStateString}.
 
-${isDirectQuestion ? 
-`The user asked a specific question. Answer it fully and explain concepts if asked. ${guidanceTone}` 
-: 
-`The user performed an action. Give the IMMEDIATE NEXT STEP only.
-STRICT RULES:
-1. NO component lists.
-2. NO theoretical explanations.
-3. NO "Let's review" or "Typically includes" chatter.
-4. Output EXACTLY 1-2 short sentences telling the user what to click or connect right now.
-${guidanceTone}`}
+            // --- Coming-soon experiments: nothing to guide yet ---
+            if (exp.comingSoon) {
+                if (responseArea) responseArea.innerHTML = `<p class="chat-bubble text-gray-700 text-sm">🚧 "${exp.name}" isn't built yet - nothing to guide you through here.</p>`;
+                return;
+            }
 
-Key Tasks:
-1. Analyze the circuit.
-2. Find the missing part.
-3. Tell the user to place/connect it.
+            const steps = exp.steps || [];
 
-IMPORTANT: Be brief. Do not lecture.`;
+            // --- Deterministic step advancement (only for real actions, not direct questions) ---
+            if (!isDirectQuestion && steps.length > 0) {
+                const prevSnapshot = lastFriendSnapshot;
+                const stepBeforeAdvancing = steps[friendStepIndex];
 
-const userQuery = `Current Circuit State (Components/Connections):\n${circuitContext}\n\nLast User Action: ${action}.`;
+                // Advance past any steps whose check() already passes (skips
+                // ahead if the user did several things at once), then show
+                // the first step that is NOT yet complete.
+                while (friendStepIndex < steps.length && steps[friendStepIndex].check(snapshot)) {
+                    friendStepIndex++;
+                }
 
-const payload = { contents: [{ parts: [{ text: userQuery }] }] };
-            // 4. Call the generic caller for the Friend Assistant
-            const text = await genericAPICaller(systemPrompt, payload, 'friend-response-area', 'friend-loading-indicator');
-            
+                let message;
+                if (friendStepIndex >= steps.length) {
+                    message = "✅ All steps complete! Review your results below.";
+                } else if (stepBeforeAdvancing && friendStepIndex === steps.indexOf(stepBeforeAdvancing)) {
+                    // Still on the same step as before this action - check whether
+                    // the action that just happened was actually a mistake.
+                    const mistake = detectMistake(stepBeforeAdvancing, prevSnapshot, snapshot);
+                    message = mistake || steps[friendStepIndex].text;
+                } else {
+                    message = steps[friendStepIndex].text;
+                }
+
+                lastFriendSnapshot = snapshot;
+
+                if (responseArea) {
+                    const isWarning = message.startsWith('⚠️');
+                    responseArea.innerHTML = `<p class="chat-bubble ${isWarning ? 'text-red-600' : 'text-gray-700'} text-sm">${message}</p>`;
+                    responseArea.scrollTop = responseArea.scrollHeight;
+                }
+                return; // No LLM call needed - this is fully deterministic and instant.
+            }
+
+            lastFriendSnapshot = snapshot;
+
+            // --- Direct question / doubt: ground the LLM in the real circuit and step list ---
+            const circuitDescription = describeCircuitState(snapshot);
+            const stepsList = steps.map((s, i) => `${i + 1}. ${s.text}`).join('\n');
+
+            let guidanceTone;
+            if (frustrationLevel >= 9) guidanceTone = "Student is EXTREMELY frustrated. Be as blunt and simple as possible.";
+            else if (frustrationLevel >= 7) guidanceTone = "Student is very frustrated. Be direct and clear, no fluff.";
+            else if (frustrationLevel >= 5) guidanceTone = "Student is a bit frustrated. Be clear and encouraging.";
+            else guidanceTone = "Student is calm. Be friendly and brief.";
+
+            const systemPrompt = `You are Friend Assistant, a hands-on lab partner watching the student's circuit canvas live.
+
+Experiment: ${currentGoalText}
+
+The correct ordered steps to finish this experiment are:
+${stepsList || "(no fixed step list for this experiment - use the goal above)"}
+
+What is actually on the canvas right now:
+${circuitDescription}
+
+Digital Inputs currently: ${digitalInputs.join('')}.
+
+The user asked a direct question or said they're stuck - answer it or help debug, grounded in the real canvas state above.
+
+STRICT OUTPUT RULES:
+1. Reply in 1-3 short sentences, no more.
+2. No step numbers, no bullet lists, no generic theory dumps - be concrete and reference what's actually on the canvas.
+3. ${guidanceTone}`;
+
+            const userQuery = `Last User Action / Question: ${action}.`;
+            const payload = { contents: [{ parts: [{ text: userQuery }] }] };
+            const rawText = await genericAPICaller(systemPrompt, payload, null, 'friend-loading-indicator');
+            const text = (rawText && rawText !== "API_ERROR") ? toSingleLine(rawText, 260) : rawText;
+
+            if (responseArea) {
+                if (text && text !== "API_ERROR") {
+                    responseArea.innerHTML = `<p class="chat-bubble text-gray-700 text-sm">${text}</p>`;
+                    responseArea.scrollTop = responseArea.scrollHeight;
+                } else {
+                    responseArea.innerHTML = `<p class="chat-bubble text-warning-red text-sm">Error connecting to the Assistant.</p>`;
+                }
+            }
+
             // --- Digital Output Parsing (Conceptual) ---
-            if (currentExperimentKey === 'DIGITAL_LOGIC' && text !== "API_ERROR" && text.includes('Output')) {
-                const newOutputs = [...digitalOutputs]; 
-                
-                // Regex to find "Output X is Y (Z)" or similar, looking for the state (0 or 1)
+            if ((currentExperimentKey === 'DIGITAL_LOGIC' || currentExperimentKey === 'LOGIC_GATES') && text && text !== "API_ERROR" && text.includes('Output')) {
+                const newOutputs = [...digitalOutputs];
                 const outputRegex = /Output\s+([0-7])\s+(?:is|will\s+be)\s+.*?(0|1)/gi;
                 let match;
                 while ((match = outputRegex.exec(text)) !== null) {
                     const index = parseInt(match[1]);
                     const state = parseInt(match[2]);
-                    if (index >= 0 && index < NUM_DIGITAL_IO) {
-                        newOutputs[index] = state;
-                    }
+                    if (index >= 0 && index < NUM_DIGITAL_IO) newOutputs[index] = state;
                 }
-                
-                // Update the global state and UI only if changes were parsed
                 if (newOutputs.join('') !== digitalOutputs.join('')) {
                     digitalOutputs = newOutputs;
-                    components.filter(c => c.type === 'DigitalOutput').forEach(comp => {
-                       comp.state.outputs = digitalOutputs;
-                    });
+                    components.filter(c => c.type === 'DigitalOutput').forEach(comp => { comp.state.outputs = digitalOutputs; });
                     updateDigitalIOUI();
                 }
             }
